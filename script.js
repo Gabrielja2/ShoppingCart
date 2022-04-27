@@ -46,13 +46,33 @@ const append = async () => {
 
   produtoResult.forEach((produto) => {
     const { id: sku, title: name, thumbnail: image } = produto;
-    const criarElemento = createProductItemElement({ sku, name, image });
+    const produtoCriado = createProductItemElement({ sku, name, image });
     const elementoPai = document.querySelector('.items');
 
-    elementoPai.appendChild(criarElemento);    
+    elementoPai.appendChild(produtoCriado);    
   });
 };
 
-window.onload = () => {
-append();
+const appendCarrinho = async () => {    
+  const buttons = document.querySelectorAll('.item__add');  
+  const elementoPai2 = document.querySelector('.cart__items');
+  // const produto = await fetchItem(product);  
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', async () => {
+     const id = button.previousElementSibling
+     .previousElementSibling
+     .previousElementSibling.innerText;
+     const produto = await fetchItem(id);
+     const { id: sku, title: name, price: salePrice } = produto;
+     const cartCriado = createCartItemElement({ sku, name, salePrice });
+
+     elementoPai2.appendChild(cartCriado);
+    });
+  }); 
+};
+
+window.onload = async () => {
+ await append();
+ await appendCarrinho();
 };
