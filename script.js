@@ -72,8 +72,17 @@ const appendCarrinho = async () => {
   }); 
 };
 
+const apagaTudo = () => {
+  const buttonLimpar = document.querySelector('.empty-cart');
+  const elementoPai2 = document.querySelector('.cart__items');
+
+  buttonLimpar.addEventListener('click', () => {
+    elementoPai2.innerText = '';
+  });
+};
+
 window.onload = async () => {
  await append();
- await appendCarrinho();
- await cartItemClickListener();
+ await appendCarrinho(); 
+ apagaTudo(); 
 };
