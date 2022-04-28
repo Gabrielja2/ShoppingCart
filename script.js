@@ -29,7 +29,7 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
+  event.target.remove();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -75,4 +75,5 @@ const appendCarrinho = async () => {
 window.onload = async () => {
  await append();
  await appendCarrinho();
+ await cartItemClickListener();
 };
