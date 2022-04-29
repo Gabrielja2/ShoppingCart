@@ -82,10 +82,11 @@ const apagaTudo = () => {
   });
 };
 
-const storage = () => {
-  getSavedCartItems();
-  const items = document.querySelectorAll('.cart__item');
-  items.forEach((item) => {
+const storage = () => {  
+  elementoPai2.innerHTML = getSavedCartItems();
+
+  const list = document.querySelectorAll('.cart__item');
+  list.forEach((item) => {
     item.addEventListener('click', cartItemClickListener);
   });
   };
