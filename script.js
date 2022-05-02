@@ -30,20 +30,35 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
-function cartItemClickListener(event) {    
+function cartItemClickListener(event) {
   event.target.remove();
-  saveCartItems(elementoPai2.innerHTML);   
+  saveCartItems(elementoPai2.innerHTML);
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({ image, sku, name, salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
-  return li;  
+  li.appendChild(createProductImageElement(image));
+  return li;
+}
+
+function carregando() {
+  const elemento = document.createElement('p');
+  elemento.innerText = 'carregando...';
+  elemento.setAttribute('class', 'loading');
+  
+  elementoPai2.appendChild(elemento);
+}
+
+function removendo() {
+  const loading = document.querySelectorAll('.loading');
+  loading.forEach((elemento) => elemento.remove());
 }
 
 const append = async () => {
+  carregando();
   const produtos = await fetchProducts('computador');
   const produtoResult = await produtos.results;
 
@@ -51,13 +66,13 @@ const append = async () => {
     const { id: sku, title: name, thumbnail: image } = produto;
     const produtoCriado = createProductItemElement({ sku, name, image });
     const elementoPai = document.querySelector('.items');
-
+    removendo();
     elementoPai.appendChild(produtoCriado);
   });
 };
 
 const appendCarrinho = async () => {    
-  const buttons = document.querySelectorAll('.item__add');  
+  const buttons = document.querySelectorAll('.item__add');
 
   buttons.forEach((button) => {
     button.addEventListener('click', async () => {
@@ -65,12 +80,12 @@ const appendCarrinho = async () => {
      .previousElementSibling
      .previousElementSibling.innerText;
      const produto = await fetchItem(id);
-     const { id: sku, title: name, price: salePrice } = produto;
-     const cartCriado = createCartItemElement({ sku, name, salePrice });
+     const { thumbnail: image, id: sku, title: name, price: salePrice } = produto;
+     const cartCriado = createCartItemElement({ image, sku, name, salePrice });
      elementoPai2.appendChild(cartCriado);
-     saveCartItems(elementoPai2.innerHTML);    
-    });     
-  });   
+     saveCartItems(elementoPai2.innerHTML);
+    });
+  });
 };
 
 const apagaTudo = () => {
@@ -89,11 +104,21 @@ const storage = () => {
   list.forEach((item) => {
     item.addEventListener('click', cartItemClickListener);
   });
-  };
+};
+
+const criarTotalValores = () => {
+  const p = document.createElement('p');
+  const pai = document.querySelector('.cart');
+  const button = document.querySelector('.empty-cart');
+  p.setAttribute('class', 'total-price');
+  p.innerHTML = 'Total:';
+  pai.insertBefore(p, button);
+};
 
 window.onload = async () => {
  await append();
  await appendCarrinho();
  apagaTudo();
  storage();
+ criarTotalValores();
 };
