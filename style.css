@@ -160,6 +160,5 @@ body {
 .cart__item {
   display: flex;
   flex-direction: row-reverse;
-  border: 2px solid rgb(5, 52, 219);
   align-items: center;
 }
