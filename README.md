@@ -1,16 +1,8 @@
-# 🚧 README em construção 🚧
+<h1>Olá bem vindos ao Shopping Cart</h1>
+Um carrinho de compras totalmente dinâmico, desenvolvido em Javascript, HTML e CSS.
+Essa aplicação faz uma requisição a API do mercadolivre através de funções assíncronas.
+Para garantir a qualidade do código, também foi realizado testes unitários.
 
-<!-- Olá, Tryber!
+Esse repositório foi um projeto desenvolvido durante meus estudos no módulo de fundamentos na Trybe, onde apenas alguns arquivos que foram feitos pela trybe que são essênciais para o funcionamento do código foram mantidos e o resto foi desenvolvido por mim.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
 
-É essencial que você preencha esse documento por conta própria, ok?
-
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
-
--->
